@@ -32,7 +32,7 @@ const ChatInputBox = ({ onNewMessage }) => {
 
     try {
       
-      const response = await axios.post('http://localhost:5500/chat', { message: inputText });
+      const response = await axios.post('https://growwth-partners-assignment.onrender.com/chat/', { message: inputText });
 
       if (response.data.error) {
         console.error('Backend error:', response.data.error);
@@ -61,7 +61,7 @@ const ChatInputBox = ({ onNewMessage }) => {
 
       try {
         
-        await axios.post('http://localhost:5500/uploads', formData, {
+        await axios.post('https://growwth-partners-assignment.onrender.com/uploads', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
