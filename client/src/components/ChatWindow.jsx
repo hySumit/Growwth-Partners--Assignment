@@ -1,30 +1,37 @@
+// ChatWindow.jsx
 import React, { useState } from 'react';
-import { GrGrow } from "react-icons/gr";
-import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
 import ChatHeading from "./ChatHeading";
 import ChatInputBox from "./ChatInputBox";
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
+import { GrGrow } from "react-icons/gr";
+import { MdDarkMode } from "react-icons/md";
+import { MdOutlineLightMode } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 
 const ChatWindow = () => {
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleNewMessage = (message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
+    if (message.role === 'user') {
+      setIsLoading(true);
+    }
+    if (message.role === 'assistant') {
+      setIsLoading(false); 
+    }
   };
 
   return (
     <div className="flex h-screen">
-      
       <div className="sidebar mt-[11.1vh]">
         <Sidebar />
       </div>
 
-      
       <div className="flex-grow">
         <section id="header_section" className="flex items-center justify-between p-2 bg-gray-100 border-b">
-          <div className="h1_header flex items-center">
+        <div className="h1_header flex items-center">
             <span className="text-3xl">
               <GrGrow />
             </span>
@@ -46,17 +53,15 @@ const ChatWindow = () => {
           </div>
         </section>
 
-        
         {messages.length === 0 && (
           <section id="ChatHeading" className="p-4 absolute right-[55vh] bottom-[45vh]">
             <ChatHeading />
           </section>
         )}
 
-        
         {messages.length > 0 && (
           <section id="Chat" className="p-4">
-            <Chat messages={messages} />
+            <Chat messages={messages} isLoading={isLoading} />
           </section>
         )}
 

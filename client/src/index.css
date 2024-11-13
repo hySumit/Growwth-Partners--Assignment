@@ -13,3 +13,100 @@
 }
 
 
+.loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #3498db;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+
+.loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #3498db;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+
+
+
+
+
+
+
+  /* Add this to your main CSS file */
+.dot-flashing {
+    position: relative;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #000;
+    color: #000;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: .5s;
+  }
+  .dot-flashing::before,
+  .dot-flashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #000;
+    color: #000;
+  }
+  .dot-flashing::before {
+    left: -6px;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+  }
+  .dot-flashing::after {
+    left: 6px;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+  }
+  @keyframes dot-flashing {
+    0% {
+      background-color: #000;
+    }
+    50%,
+    100% {
+      background-color: #999;
+    }
+  }
+
+
+
+  

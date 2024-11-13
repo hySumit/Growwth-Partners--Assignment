@@ -7,7 +7,7 @@ import { TbFileSpreadsheet } from "react-icons/tb";
 const ChatInputBox = ({ onNewMessage }) => {
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [fileName, setFileName] = useState(''); 
+  const [fileName, setFileName] = useState('');
   const textareaRef = useRef(null);
 
   const handleInputChange = (event) => {
@@ -26,12 +26,10 @@ const ChatInputBox = ({ onNewMessage }) => {
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
 
-    
     onNewMessage({ role: 'user', content: inputText });
     setIsLoading(true);
 
     try {
-      
       const response = await axios.post('https://growwth-partners-assignment.onrender.com/chat/', { message: inputText });
 
       if (response.data.error) {
@@ -40,8 +38,6 @@ const ChatInputBox = ({ onNewMessage }) => {
       }
 
       const assistantResponse = response.data.response || 'No response';
-
-      
       onNewMessage({ role: 'assistant', content: assistantResponse });
     } catch (error) {
       console.error("Failed to send message:", error.response ? error.response.data : error.message);
@@ -60,7 +56,6 @@ const ChatInputBox = ({ onNewMessage }) => {
       formData.append('file', file);
 
       try {
-        
         await axios.post('https://growwth-partners-assignment.onrender.com/uploads', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -101,9 +96,18 @@ const ChatInputBox = ({ onNewMessage }) => {
             style={{ lineHeight: '1.5', maxHeight: '80px' }}
           />
           <LuSparkles className="text-gray-500 mx-3" />
-          <button className="text-blue-500 text-[17px] hover:text-blue-700" onClick={handleSendMessage} disabled={isLoading}>
-            <BsSend />
-          </button>
+
+          {isLoading ? (
+            <div className="loading-spinner mr-3"></div>
+          ) : (
+            <button
+              className="text-blue-500 text-[17px] hover:text-blue-700"
+              onClick={handleSendMessage}
+              disabled={isLoading}
+            >
+              <BsSend />
+            </button>
+          )}
         </div>
       </section>
     </div>
